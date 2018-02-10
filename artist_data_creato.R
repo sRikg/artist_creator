@@ -43,4 +43,52 @@ data1[,2] <- paste0(data1[,2], "/")
 data1[,9] <- paste0(data1[,9], "/")
 data1[,10] <- paste0(data1[,10], "/")
 
+temp <- unique(data1[,c(2,5:7)])
+temp <- temp[order(temp[,c(1:2)]),]
+min(which(temp[1:896,1] != unique(temp[,1])))
+
+data1[
+        data1[,2] == temp[min(which(temp[1:896,1] != unique(temp[,1]))), 1],
+        4
+] <- max(temp[min(which(temp[1:896,1] != unique(temp[,1]))), 3])
+
+length(unique(temp[,1]))
+length(temp[,1])
+
+for(j in 1:900){
+        temp <- unique(data[,c(1:2,5:7)])
+        temp$new_id <- sapply(
+                1:nrow(temp),
+                function(i) paste(
+                        temp[i,1], 
+                        temp[i,2], 
+                        temp[i,3], 
+                        sep = "_")
+                )
+        temp <- temp[order(temp[,1], temp[,2], temp[,3]),]
+        i <- min(which(temp[1:5049,6] != unique(temp[,6])))
+        data[data[,1] == temp[i,1] & 
+             data[,2] == temp[i,2] & 
+             data[,5] == temp[i,3], 6] <- min(data[
+                data[,1] == temp[i,1] & 
+                data[,2] == temp[i,2] & 
+                data[,5] == temp[i,3], 
+                6])
+        
+        data[data[,1] == temp[i,1] & 
+             data[,2] == temp[i,2] & 
+             data[,5] == temp[i,3], 
+             7] <- max(data[
+                data[,1] == temp[i,1] & 
+                data[,2] == temp[i,2] & 
+                data[,5] == temp[i,3], 
+                7])
+        
+        print(j)
+}
+
+dim(unique(data))
+length(unique(temp[,6]))
+
+
 
